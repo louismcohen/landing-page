@@ -35,7 +35,7 @@ const Tile = ({ title, subtitle, icon, href }: TileProps) => {
 
   return (
     <a href={href} target='_blank' rel='noreferrer'>
-      <div className='flex flex-row gap-4 w-full justify-start items-center p-4 text-light/90 bg-neutral-100/25 border border-neutral-50/20 hover:bg-yellow-500/20 hover:border-yellow-500/33 active:bg-yellow-500/30 active:border-yellow-500/50 hover:scale-102 active:scale-98 transition-all cursor-pointer rounded-xl shadow-lg hover:shadow-xl active:shadow-md'>
+      <div className='flex flex-row gap-4 w-full justify-start items-center p-4 text-light/90 bg-neutral-100/25 border border-neutral-50/20 hover:bg-yellow/20 hover:border-yellow/33 active:bg-yellow/30 active:border-yellow/50 hover:scale-102 active:scale-98 transition-all cursor-pointer rounded-xl shadow-lg hover:shadow-xl active:shadow-md'>
         <IconComponent weight='regular' size='36' />
         <div className='flex flex-col gap-0 justify-center items-start'>
           <p className='font-semibold text-lg select-none'>{title}</p>
