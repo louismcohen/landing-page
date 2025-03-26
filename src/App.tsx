@@ -70,7 +70,7 @@ const Section = ({ title, children }: SectionProps) => {
 const App = () => {
   const [randomImage, setRandomImage] = useState<string>('');
 
-  console.log({ images });
+  // console.info({ images });
 
   useEffect(() => {
     const importImages = async () => {
