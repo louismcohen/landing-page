@@ -11,7 +11,9 @@ import logoDarkBg from './assets/logo-dark-bg.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 
-const images = import.meta.glob('./assets/images/*.{png,jpg,jpeg,svg}');
+const images = import.meta.glob('./assets/images/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+});
 
 const PhoneChat = ({ size = 48, color = 'currentColor' }: IconProps) => {
   return <PhoneChatIcon height={size} width={size} fill={color} />;
@@ -67,7 +69,7 @@ const Section = ({ title, children }: SectionProps) => {
 const App = () => {
   const [randomImage, setRandomImage] = useState<string>('');
 
-  // console.log({ images });
+  console.log({ images });
 
   useEffect(() => {
     const importImages = async () => {
