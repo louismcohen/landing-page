@@ -11,6 +11,8 @@ import logoDarkBg from './assets/logo-dark-bg.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 
+const images = import.meta.glob('./assets/images/*.{png,jpg,jpeg,svg}');
+
 const PhoneChat = ({ size = 48, color = 'currentColor' }: IconProps) => {
   return <PhoneChatIcon height={size} width={size} fill={color} />;
 };
@@ -35,7 +37,7 @@ const Tile = ({ title, subtitle, icon, href }: TileProps) => {
 
   return (
     <a href={href} target='_blank' rel='noreferrer'>
-      <div className='flex flex-row gap-4 w-full justify-start items-center p-4 text-light/90 bg-neutral-100/25 border border-neutral-50/20 hover:bg-yellow/20 hover:border-yellow/33 active:bg-yellow/30 active:border-yellow/50 hover:scale-102 active:scale-98 transition-all cursor-pointer rounded-xl shadow-lg hover:shadow-xl active:shadow-md'>
+      <div className='flex flex-row gap-4 w-full justify-start items-center p-4 text-light/90 bg-neutral-100/25 border border-neutral-50/20 hover:bg-yellow/33 hover:border-yellow/33 active:bg-yellow/30 active:border-yellow/50 hover:scale-102 active:scale-98 transition-all cursor-pointer rounded-xl shadow-lg hover:shadow-xl active:shadow-md'>
         <IconComponent weight='regular' size='36' />
         <div className='flex flex-col gap-0 justify-center items-start'>
           <p className='font-semibold text-lg select-none'>{title}</p>
@@ -54,7 +56,7 @@ interface SectionProps {
 const Section = ({ title, children }: SectionProps) => {
   return (
     <div className='flex flex-col gap-2 w-full'>
-      <p className='font-extrabold uppercase tracking-tight text-xl text-light text-left font-[Gabarito] drop-shadow-md'>
+      <p className='font-extrabold uppercase tracking-tight text-xl text-light text-left font-header drop-shadow-md'>
         {title}
       </p>
       {children}
@@ -65,13 +67,12 @@ const Section = ({ title, children }: SectionProps) => {
 const App = () => {
   const [randomImage, setRandomImage] = useState<string>('');
 
+  // console.log({ images });
+
   useEffect(() => {
     const importImages = async () => {
-      const imageImports = import.meta.glob(
-        './assets/images/*.{png,jpg,jpeg,svg}'
-      );
-      const imagePaths = Object.keys(imageImports).map((path) =>
-        path.replace('./assets', '/src/assets')
+      const imagePaths = Object.keys(images).map((path) =>
+        import.meta.env.PROD ? path : path.replace('./assets', '/src/assets')
       );
 
       const randomIndex = Math.floor(Math.random() * imagePaths.length);
@@ -88,7 +89,9 @@ const App = () => {
     >
       <div className='fixed w-full h-full bg-dark/90 flex justify-center items-center p-4'>
         <div className='flex flex-col w-fit justify-center items-center gap-2 overflow-hidden overscroll-none'>
-          <img src={logoDarkBg} alt='logo' width={400} />
+          <div className='flex justify-center items-center object-scale-down max-w-[400px] p-4'>
+            <img src={logoDarkBg} alt='logo' />
+          </div>
           <div className='flex flex-col gap-8 bg-neutral-50/20 px-4 py-6 md:px-6 md:py-8 border border-neutral-50/20 rounded-2xl drop-shadow-2xl shadow-xl w-full backdrop-blur-sm'>
             <Section title='Learn More'>
               <Tile
@@ -109,7 +112,7 @@ const App = () => {
                 title='Call or Text'
                 subtitle='(310) 993-5094'
                 icon='phoneChat'
-                href='tel:+13109935094'
+                href='sms:+13109935094'
               />
               <Tile
                 title='Email'

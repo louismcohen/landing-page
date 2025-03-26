@@ -2,7 +2,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Schibsted Grotesk', 'Gabarito', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-sans: 'Schibsted Grotesk', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-header: 'Gabarito', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --color-dark: #1E1014;
   --color-light: #FFFCFF;
   --color-eggplant: #4A3D42;
