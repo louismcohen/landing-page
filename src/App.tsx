@@ -11,8 +11,9 @@ import logoDarkBg from './assets/logo-dark-bg.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 
-const images = import.meta.glob('./assets/images/*.{png,jpg,jpeg,svg}', {
-  eager: true,
+const images = Array.from({ length: 11 }, (_, i) => {
+  const number = String(i + 1).padStart(2, '0');
+  return `/images/${number}.jpeg`;
 });
 
 const PhoneChat = ({ size = 48, color = 'currentColor' }: IconProps) => {
@@ -73,12 +74,8 @@ const App = () => {
 
   useEffect(() => {
     const importImages = async () => {
-      const imagePaths = Object.keys(images).map((path) =>
-        import.meta.env.PROD ? path : path.replace('./assets', '/src/assets')
-      );
-
-      const randomIndex = Math.floor(Math.random() * imagePaths.length);
-      setRandomImage(imagePaths[randomIndex]);
+      const randomIndex = Math.floor(Math.random() * images.length);
+      setRandomImage(images[randomIndex]);
     };
 
     importImages();
